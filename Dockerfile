@@ -21,4 +21,4 @@ WORKDIR /app
 
 ENV PYTHONUNBUFFERED 1
 
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["/app/entrypoint.sh"]

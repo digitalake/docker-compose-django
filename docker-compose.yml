@@ -3,7 +3,7 @@ version: '3.8'
 services:
   django:
     image: ${APP_SERVICE_IMAGE}
-    build: ./app
+    build: .
     container_name: django
     env_file:
       - .env
