@@ -31,7 +31,7 @@ services:
       start_period: 3s
     restart: always
     networks:
-      - appnet  # Attach to the custom network
+      - appnet
     volumes:
       - pgdata:/var/lib/postgresql/data
 
