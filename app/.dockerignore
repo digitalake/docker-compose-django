@@ -1,0 +1,43 @@
+# Ignore common Python and development files
+*.pyc
+*.pyo
+__pycache__
+*.egg-info/
+*.egg
+*.DS_Store
+*.swp
+
+# Ignore version control system files
+.git
+.gitignore
+
+# Ignore database files
+*.sqlite3
+
+# Ignore temporary and build files
+__pycache__/
+*.db
+*.log
+*.pot
+*.po
+*.mo
+*.sql
+
+# Ignore generated and compiled files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Ignore Docker specific files
+Dockerfile
+.dockerignore
+
+# Ignore project specific files/directories that don't need to be in the image
+# Adjust this list based on your project's specific needs
+venv/
+*.env
+*.cfg
+*.json
+
+
