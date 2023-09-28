@@ -5,7 +5,7 @@ RUN apk add --update --virtual .build-deps \
     python3-dev \
     libpq
 
-COPY ./app/requirements.txt /app/requirements.txt
+COPY ./requirements.txt /app/requirements.txt
 RUN pip install -r /app/requirements.txt
 
 FROM python:3.8.18-alpine
@@ -15,7 +15,7 @@ RUN apk add libpq
 COPY --from=Zhytomyr /usr/local/lib/python3.8/site-packages/ /usr/local/lib/python3.8/site-packages/
 COPY --from=Zhytomyr /usr/local/bin/ /usr/local/bin/
 
-COPY ./app /app
+COPY . /app
 
 WORKDIR /app
 

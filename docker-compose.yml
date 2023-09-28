@@ -3,7 +3,7 @@ version: '3.8'
 services:
   django:
     image: ${APP_SERVICE_IMAGE}
-    build: .
+    build: ./app
     container_name: django
     env_file:
       - .env
@@ -30,10 +30,10 @@ services:
       retries: 5
       start_period: 3s
     restart: always
-    networks:
-      - appnet
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      - appnet
 
   pgadmin:
     image: dpage/pgadmin4:${PGADMIN_SERVICE_IMAGE_VERSION}
@@ -46,10 +46,10 @@ services:
       postgres:
         condition: service_healthy
     restart: always
-    networks:
-      - appnet
     volumes:
       - pgadmindata:/var/lib/pgadmin
+    networks:
+      - appnet
 
 networks:
   appnet:
