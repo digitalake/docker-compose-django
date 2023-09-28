@@ -4,11 +4,9 @@ services:
   django:
     image: ${APP_SERVICE_IMAGE}
     build: ./app
-    container_name: django
-    env_file:
-      - .env
+    container_name: ${COMPOSE_PROJECT_NAME}-django
     ports:
-      - "80:8000"
+      - ${APP_PORTS}
     environment:
       DATABASE_URL: "postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}"
     depends_on:
@@ -20,9 +18,11 @@ services:
 
   postgres:
     image: ${DB_SERVICE_IMAGE}
-    container_name: postgres
-    env_file:
-      - .env
+    container_name: ${COMPOSE_PROJECT_NAME}-postgres
+    environment:
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 10s
@@ -37,11 +37,12 @@ services:
 
   pgadmin:
     image: dpage/pgadmin4:${PGADMIN_SERVICE_IMAGE_VERSION}
-    container_name: pgadmin
+    container_name: ${COMPOSE_PROJECT_NAME}-pgadmin
     ports:
-      - "5050:80"
-    env_file:
-      - .env
+      - ${PGADMIN_LOCAL_PORT}:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL
+      - PGADMIN_DEFAULT_PASSWORD
     depends_on:
       postgres:
         condition: service_healthy
